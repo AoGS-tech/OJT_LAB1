@@ -1,0 +1,9 @@
+#login-form{
+  background-image: url(../../images/login-background.jpg);
+  background-repeat: none;
+  background-size: contain;
+}
+
+#login-box {
+  margin-top: 12em;
+}

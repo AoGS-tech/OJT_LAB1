@@ -1,0 +1,31 @@
+CREATE TABLE [Employee] (
+  [EmpID] int,
+  [Fullname] nvarchar(100),
+  [Birthday] date,
+  [Gender] bit,
+  [Email] nvarchar(100),
+  [Phone] nvarchar(11),
+  [Address] nvarchar(200),
+  [DepartmentID] int
+)
+GO
+
+CREATE TABLE [Account] (
+  [AccID] int,
+  [Account] nvarchar(50),
+  [Password] nvarchar(50),
+  [EmpID] int
+)
+GO
+
+CREATE TABLE [Deparment] (
+  [DepartmentID] int,
+  [DeparmentName] nvarchar(100)
+)
+GO
+
+ALTER TABLE [Employee] ADD FOREIGN KEY ([DepartmentID]) REFERENCES [Deparment] ([DepartmentID])
+GO
+
+ALTER TABLE [Account] ADD FOREIGN KEY ([EmpID]) REFERENCES [Employee] ([EmpID])
+GO

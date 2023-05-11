@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Employee } from 'src/app/model/employee';
 
 @Component({
@@ -6,11 +6,16 @@ import { Employee } from 'src/app/model/employee';
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
+
 export class UserManagementComponent implements OnInit {
 
-  constructor() { }
+  pageNumber: number = 0;
+  constructor(){
 
-  ngOnInit() {
+  }
+  ngOnInit(): void {
+    // throw new Error('Method not implemented.');
+    // this.pagination(1);
   }
 
   employees: Employee[] =
@@ -29,7 +34,7 @@ export class UserManagementComponent implements OnInit {
       id: 2,
       fullname: "Nguyễn Văn A",
       birthday: "2002-12-02",
-      gender: true,
+      gender: false,
       email: "seoao24@gmail.com",
       phone: "0961973785",
       address: "Lào Cai",
@@ -187,28 +192,30 @@ export class UserManagementComponent implements OnInit {
     }
   ]
 
-  // hiện thị danh sách users
-  show(innerHtml: string){
-    let item = document.querySelector("#list-users");
+  currentPage = 1;
+  itemsPerPage = 10;
 
-    //kiểm tra, nếu user tồn tại thì thêm vào
-    if(item){
-      item.innerHTML = innerHtml;
-    }
+  get totalPages(): number {
+    return this.employees.length / this.itemsPerPage + 1;
   }
 
-  render(callback: (data: string) => any){
-    let innerHtml = this.employees.map((e) => {
-      return
-      // <tr>
-      // <td>${e.fullname}</td>
-      // <td>${e.birthday}</td>
-      // <td>${e.gender}</td>
-      // <td>${e.email}</td>
-      // <td>${e.phone}</td>
-      // <td>${e.address}</td>
-      // <td>${e.department}</td>
-      // </tr>
-    }).join('');
+  get displayedData(): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.employees.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number) {
+    if(page > 0 && page < this.totalPages) this.currentPage = page;
+  }
+
+  showNextButton(): any{
+    if(this.currentPage < this.totalPages) return true;
+    else return false;
+  }
+
+  showPrePButton(): any {
+    if(this.currentPage > 1) return true;
+    else return false;
   }
 }

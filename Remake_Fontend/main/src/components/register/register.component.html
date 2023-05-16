@@ -1,0 +1,69 @@
+<div class="vw-100 d-flex justify-content-center" id="page-login">
+  <div class="card col-5 mt-5" id="login-form">
+    <div id="logo-vnpt">
+      <img src="../../assets/images/vnpt-logo.png" alt="" class="w-100 h-100">
+    </div>
+    <form [formGroup]="userData">
+      <div class="form-group mx-4">
+        <label for="">Fullname</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="d-flex mt-4 justify-content-between mx-4">
+        <div class="col-7 form-group">
+          <label for="">Birthday</label>
+          <input type="date" class="form-control">
+        </div>
+        <div class="col-4 form-group">
+          <label for="">Gender</label>
+          <select name="" id="" class="form-select">
+            <option value="true">Male</option>
+            <option value="false">Female</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group mx-4">
+        <label for="">Phone</label>
+        <input type="text" class="form-control">
+      </div>
+
+      <div class="form-group mx-4">
+        <label for="">Email</label>
+        <input type="email" class="form-control" formControlName="email">
+      </div>
+      <!-- validate email -->
+      <div *ngIf="userData.get('email')?.invalid && userData.get('email')?.touched">
+        <div *ngIf="userData.get('email')?.errors?.['required']">
+          <small class="text-danger mx-4">Email is required!</small>
+        </div>
+        <div *ngIf="userData.get('email')?.errors?.['email']">
+          <small class="text-danger mx-4">Email is invalid!</small>
+        </div>
+      </div>
+      <!-- end validate email  -->
+
+      <div class="form-group mx-4 mt-4">
+        <label for="">Password</label>
+        <input type="password" class="form-control" formControlName="password">
+      </div>
+      <!-- validate password  -->
+      <div *ngIf="userData.get('password')?.invalid && userData.get('password')?.touched">
+        <div *ngIf="userData.get('password')?.errors?.['required']">
+          <small class="text-danger mx-4">Password is required!</small>
+        </div>
+      </div>
+
+      <div class="form-group mx-4">
+        <label for="">Address</label>
+        <textarea name="" id="" cols="30" rows="2" class="form-control"></textarea>
+      </div>
+      <div class="d-flex justify-content-center mx-4 mt-5">
+        <button class="btn btn-primary w-100">Register</button>
+      </div>
+
+      <div class="d-flex justify-content-center mt-1 mb-3">
+        <a href="/login" class="mx-2 fw-bold text-decoration-none">Have an account?</a>
+      </div>
+    </form>
+  </div>
+</div>>

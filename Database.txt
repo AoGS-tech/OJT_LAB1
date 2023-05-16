@@ -33,3 +33,4 @@ ALTER TABLE `Employee` ADD FOREIGN KEY (`DepartmentID`) REFERENCES `Deparment` (
 ALTER TABLE `Account` ADD FOREIGN KEY (`EmpID`) REFERENCES `Employee` (`EmpID`);
 
 ALTER TABLE `Employee` ADD FOREIGN KEY (`RoleID`) REFERENCES `Role` (`RoleID`);
+

@@ -11,6 +11,19 @@ import { Employee } from 'src/model/employee';
 })
 export class UserManagementComponent implements OnInit {
 
+  //sample api
+  // const httpOptions ={
+  //   headers:new HttpHeaders({'Content-Type':'Application/json'})
+  // }
+  // const apiUrl = 'https://5f0c7a5911b7f60016055e6c.mockapi.io/Api/ahihi';
+
+  // constructor(private httpClient:HttpClient) { }
+
+  // getAll():Observable<Product[]>{
+  //   return this.httpClient.get<Product[]>(apiUrl).pipe(
+  //   )
+  // }
+
   totalEmployeePerPage: number[] = [5, 10, 15, 20];
 
   items: Employee[]; // Dữ liệu cần phân trang

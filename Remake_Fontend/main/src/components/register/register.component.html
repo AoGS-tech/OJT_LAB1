@@ -6,8 +6,19 @@
     <form [formGroup]="userData">
       <div class="form-group mx-4">
         <label for="">Fullname</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="fullname">
       </div>
+      <!-- validate fullname  -->
+      <div *ngIf="userData.get('fullname')?.invalid && userData.get('fullname')?.touched">
+        <div *ngIf="userData.get('fullname')?.errors?.['required']">
+          <small class="text-danger mx-4">Fullname is required!</small>
+        </div>
+        <div *ngIf="userData.get('fullname')?.errors?.['pattern']">
+          <small class="text-danger mx-4">Fullname is invalid!</small>
+        </div>
+      </div>
+      <!-- end validate fullname  -->
+
       <div class="d-flex mt-4 justify-content-between mx-4">
         <div class="col-7 form-group">
           <label for="">Birthday</label>
@@ -22,12 +33,21 @@
         </div>
       </div>
 
-      <div class="form-group mx-4">
+      <div class="form-group mx-4 mt-4">
         <label for="">Phone</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" formControlName="phone">
+      </div>
+      <!-- validate phone  -->
+      <div *ngIf="userData.get('phone')?.invalid && userData.get('phone')?.touched">
+        <div *ngIf="userData.get('phone')?.errors?.['required']">
+          <small class="text-danger mx-4">Phone is required!</small>
+        </div>
+        <div *ngIf="userData.get('phone')?.errors?.['maxLength'] && userData.get('phone')?.errors?.['minLength'] && userData.get('phone')?.errors?.['pattern']">
+          <small class="text-danger mx-4">Phone is included by 10 or 11 digits!</small>
+        </div>
       </div>
 
-      <div class="form-group mx-4">
+      <div class="form-group mx-4 mt-4">
         <label for="">Email</label>
         <input type="email" class="form-control" formControlName="email">
       </div>
@@ -53,12 +73,32 @@
         </div>
       </div>
 
-      <div class="form-group mx-4">
+      <div class="form-group mx-4 mt-4">
+        <label for="">Comfirm password</label>
+        <input type="password" class="form-control" formControlName="rePasword" [readOnly]="userData.get('password')?.value == ''">
+      </div>
+      <!-- validate password  -->
+      <div *ngIf="userData.get('rePasword')?.invalid && userData.get('rePasword')?.dirty">
+        <div *ngIf="userData.get('rePasword')?.errors?.['required']">
+          <small class="text-danger mx-4">Comfirm password is required!</small>
+        </div>
+      </div>
+      <div *ngIf="userData.get('rePasword')?.value !== userData.get('password')?.value && userData.get('rePasword')?.valid">
+        <small class="text-danger mx-4">Password not match!</small>
+      </div>
+
+      <div class="form-group mx-4 mt-4">
         <label for="">Address</label>
-        <textarea name="" id="" cols="30" rows="2" class="form-control"></textarea>
+        <textarea name="" id="" cols="30" rows="2" class="form-control" formControlName="address"></textarea>
+      </div>
+      <!-- validate address  -->
+      <div *ngIf="userData.get('address')?.invalid && userData.get('address')?.touched">
+        <div *ngIf="userData.get('address')?.errors?.['required']">
+          <small class="text-danger mx-4">Addres is required!</small>
+        </div>
       </div>
       <div class="d-flex justify-content-center mx-4 mt-5">
-        <button class="btn btn-primary w-100">Register</button>
+        <button class="btn btn-primary w-100" (click)="onSubmit()">Register</button>
       </div>
 
       <div class="d-flex justify-content-center mt-1 mb-3">

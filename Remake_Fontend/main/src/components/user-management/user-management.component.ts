@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 import { Employee } from 'src/model/employee';
 
@@ -38,7 +38,10 @@ export class UserManagementComponent implements OnInit {
   passUpdate(item: Employee){
     const status = "update";
     const queryData = JSON.stringify(item)
-    this.router.navigate(["/userInfo"], {queryParams: {queryData, status}});
+    const navigationExtras: NavigationExtras = {
+      state: { queryData }
+    };
+    this.router.navigate(["/userInfo"], navigationExtras);
   }
 
   handleBlock(item: Employee){

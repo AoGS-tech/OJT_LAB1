@@ -7,15 +7,17 @@ import { UserManagementComponent } from 'src/components/user-management/user-man
 import { UserInformationComponent } from 'src/components/user-information/user-information.component';
 import { RegisterComponent } from 'src/components/register/register.component';
 import { ResetPasswordComponent } from 'src/components/reset-password/reset-password.component';
+import { PageDefaultComponent } from 'src/components/page-default/page-default.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', redirectTo: '/pageDefault', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: 'userManagement', component: UserManagementComponent},
   {path: 'userInfo', component: UserInformationComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'reset', component: ResetPasswordComponent}
+  {path: 'reset', component: ResetPasswordComponent},
+  {path: 'pageDefault', component: PageDefaultComponent}
 ];
 
 @NgModule({

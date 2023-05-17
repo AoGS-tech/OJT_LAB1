@@ -35,20 +35,19 @@ export class UserInformationComponent implements OnInit {
   role: FormControl = new FormControl('');
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
-    this.route.queryParams.subscribe(params => {
-      if(params['queryData']) {
-        this.user = JSON.parse(params['queryData']);
-        this.fullname = new FormControl(this.user.Fullname);
-        this.bod = new FormControl(this.user.Birthday);
-        this.gender = new FormControl(this.user.Gender);
-        this.email = new FormControl(this.user.Email);
-        this.phone = new FormControl(this.user.Phone);
-        this.address = new FormControl(this.user.Address);
-        this.department = new FormControl(this.user.DepartmentID);
-        this.block = new FormControl(this.user.Block);
-        this.role = new FormControl(this.user.RoleID);
-      }
-    })
+    const params = this.router.getCurrentNavigation()?.extras.state?.['queryData'];
+    if(params) {
+      this.user = JSON.parse(params);
+      this.fullname = new FormControl(this.user.Fullname);
+      this.bod = new FormControl(this.user.Birthday);
+      this.gender = new FormControl(this.user.Gender);
+      this.email = new FormControl(this.user.Email);
+      this.phone = new FormControl(this.user.Phone);
+      this.address = new FormControl(this.user.Address);
+      this.department = new FormControl(this.user.DepartmentID);
+      this.block = new FormControl(this.user.Block);
+      this.role = new FormControl(this.user.RoleID);
+    }
     this.userData = this.fb.group({
     })
   }

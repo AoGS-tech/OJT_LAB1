@@ -12,6 +12,7 @@ import { UserManagementComponent } from 'src/components/user-management/user-man
 import { UserInformationComponent } from 'src/components/user-information/user-information.component';
 import { RegisterComponent } from 'src/components/register/register.component';
 import { ResetPasswordComponent } from 'src/components/reset-password/reset-password.component';
+import { PageDefaultComponent } from 'src/components/page-default/page-default.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ResetPasswordComponent } from 'src/components/reset-password/reset-pass
     UserManagementComponent,
     UserInformationComponent,
     RegisterComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    PageDefaultComponent
   ],
   imports: [
     BrowserModule,

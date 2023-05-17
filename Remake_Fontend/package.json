@@ -3,6 +3,9 @@
     "@types/jquery": "^3.5.16"
   },
   "dependencies": {
-    "@types/bootstrap": "^5.2.6"
+    "@auth0/angular-jwt": "^5.1.2",
+    "@types/bootstrap": "^5.2.6",
+    "angular-jwt": "^0.1.11",
+    "jsonwebtoken": "^9.0.0"
   }
 }

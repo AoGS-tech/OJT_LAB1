@@ -9,7 +9,7 @@ import { RegisterComponent } from 'src/components/register/register.component';
 import { ResetPasswordComponent } from 'src/components/reset-password/reset-password.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: 'userManagement', component: UserManagementComponent},

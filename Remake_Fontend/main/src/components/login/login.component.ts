@@ -33,13 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    // alert(this.userLogin.get('email')?.value + "/n" + this.userLogin.get('email')?.value);
-    // return this.http.post(this.apiUrl, {email, password})
-    // .pipe(
-    //   tap( respone => {
-    //     const token = respone.token;
-    //   })
-    // )
+
   }
 
   saveToken(token: string){

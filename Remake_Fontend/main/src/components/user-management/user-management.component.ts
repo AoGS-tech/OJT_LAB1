@@ -4,6 +4,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { Employee } from 'src/model/employee';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-management',
@@ -25,7 +26,7 @@ export class UserManagementComponent implements OnInit {
   listForm: FormGroup;
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
     // Khởi tạo dữ liệu và gán cho biến items
-    this.items = this.getListUser(20);
+    this.items = this.getListUsers();
     this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
     this.updateDisplayedItems();
     this.listForm = this.fb.group({
@@ -124,8 +125,8 @@ export class UserManagementComponent implements OnInit {
     return 1;
   }
 
-  getListUsers(){
-    return this.http.get('/');
+  getListUsers(): Observable<any>{
+    return this.http.get<Employee[]>('');
   }
 
   getListUser(total: number): Employee[] {

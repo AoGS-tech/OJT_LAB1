@@ -1,103 +1,98 @@
 <app-header></app-header>
 <div class="card">
-  <!-- card header -->
-  <div class="card-header d-flex justify-content-between">
-    <div class="fs-3 fw-bold">Employee Management</div>
-    <div>
-      <a href="/userInfo" class="d-flex justify-content-center btn btn-primary">
-        <i class="fa-solid fa-user-plus mt-1"></i>
-        <div class="mx-2">Add New</div>
-      </a>
+    <!-- card header -->
+    <div class="card-header d-flex justify-content-between">
+        <div class="fs-3 fw-bold">Employee Management</div>
+        <div>
+            <a href="/userInfo" class="d-flex justify-content-center btn btn-primary">
+                <i class="fa-solid fa-user-plus mt-1"></i>
+                <div class="mx-2">Add New</div>
+            </a>
+        </div>
     </div>
-  </div>
-  <!-- card body -->
-  <div class="card-body">
-    <form [formGroup]="listForm">
-    <div class="d-flex justify-content-between">
-      <!-- Choose total user are displayed in page -->
-      <div class="d-flex">
-        <div class="mx-2 mt-1">Show</div>
-        <select class="form-select align-items-center" id="totalUserOption" (change)="updateItemPerPage($event.target)">
+    <!-- card body -->
+    <div class="card-body">
+        <form [formGroup]="listForm">
+            <div class="d-flex justify-content-between">
+                <!-- Choose total user are displayed in page -->
+                <div class="d-flex">
+                    <div class="mx-2 mt-1">Show</div>
+                    <select class="form-select align-items-center" id="totalUserOption" (change)="updateItemPerPage($event.target)">
           <option *ngFor="let number of totalEmployeePerPage" [ngValue]="number">{{number}}</option>
         </select>
-        <div class="mt-1">entries</div>
-      </div>
+                    <div class="mt-1">entries</div>
+                </div>
 
-      <div class="d-flex">
-        <!-- Select user status will be display -->
-        <div class="d-flex mx-3">
-          <div class="mt-1 mx-2">Status</div>
-          <select class="form-select">
+                <div class="d-flex">
+                    <!-- Select user status will be display -->
+                    <div class="d-flex mx-3">
+                        <div class="mt-1 mx-2">Status</div>
+                        <select class="form-select">
             <option value="-1">All</option>
             <option value="false">Unblock</option>
             <option value="true">Block</option>
           </select>
-        </div>
-        <!-- Input name for search -->
-        <div class="form-group d-flex">
-          <label for="" class="mt-1 mx-2">Name</label>
-          <input type="text" class="form-control">
-          <button class="btn btn-primary mx-2"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-      </div>
-    </div>
+                    </div>
+                    <!-- Input name for search -->
+                    <div class="form-group d-flex">
+                        <label for="" class="mt-1 mx-2">Name</label>
+                        <input type="text" class="form-control">
+                        <button class="btn btn-primary mx-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
+            </div>
 
-    <table class="table table-bordered mt-3">
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Fullname</th>
-          <th>Gender</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of displayedItems; let i = index">
-          <td>{{i+1}}</td>
-          <td>{{item.Fullname}}</td>
-          <td>
-            <div *ngIf="item.Gender == true">
-              Male
-            </div>
-            <div *ngIf="item.Gender == false">
-              Female
-            </div>
-          </td>
-          <td>{{item.Email}}</td>
-          <td>{{item.Phone}}</td>
-          <td>
-            <div class="d-flex">
-              <button class="btn btn-warning" (click)="passUpdate(item)">Update</button>
-              <div>
-                <div *ngIf="item.Block == true" class="btn btn-primary mx-2 block" (click)="handleUnBlock(item)">UnBlock</div>
-                <div *ngIf="item.Block == false" class="btn btn-danger mx-2 block px-4" (click)="handleBlock(item)">Block</div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Fullname</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{item.Fullname}}</td>
+                        <td>
+                            {{item.Gender}}
+                        </td>
+                        <td>{{item.Email}}</td>
+                        <td>{{item.Phone}}</td>
+                        <td>
+                            <div class="d-flex">
+                                <button class="btn btn-warning" (click)="passUpdate(item)">Update</button>
+                                <div>
+                                    <div *ngIf="item.Block == true" class="btn btn-primary mx-2 block" (click)="handleUnBlock(item)">UnBlock</div>
+                                    <div *ngIf="item.Block == false" class="btn btn-danger mx-2 block px-4" (click)="handleBlock(item)">Block</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-    <div class="d-flex justify-content-between">
-      <div>You are at {{currentPage}}/{{totalPages}} pages</div>
-      <nav aria-label="...">
-        <ul class="pagination">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#" >1</a></li>
-          <li class="page-item active">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item" [ngClass]="{'d-none': totalPages < 3}"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
+            <div class="d-flex justify-content-between">
+                <div>You are at {{currentPage}}/{{totalPages}} pages</div>
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="page-item" [ngClass]="{'d-none': totalPages < 3}"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </form>
     </div>
-  </form>
-  </div>
 </div>

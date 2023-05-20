@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import * as jwt_decode from 'jsonwebtoken';
+// import * as jwt_decode from 'jsonwebtoken';
 
 @Component({
   selector: 'app-login',

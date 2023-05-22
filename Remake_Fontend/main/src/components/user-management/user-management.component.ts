@@ -22,7 +22,9 @@ export class UserManagementComponent implements OnInit {
   itemsPerPage: number = 5; // Số lượng mục trên mỗi trang
   currentPage: number = 1; // Trang hiện tại
   totalPages: number; // Tổng số trang
-
+  pageButton1: number = 1;
+  pageButton2: number = 2;
+  pageButton3: number = 3;
 
   listForm: FormGroup;
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
@@ -53,11 +55,20 @@ export class UserManagementComponent implements OnInit {
   }
 
   handleBlock(item: Employee){
-    alert('You are blocked user: ' + item.Fullname);
+    // alert('You are blocked user: ' + item.Fullname);
+   this.http.get('localhost:8080/user/employee/block/'+ item.EmpID).subscribe((rs) => {
+    if(rs == "ok"){
+      alert('You are blocked user: ' + item.Fullname);
+    }
+   })
   }
 
   handleUnBlock(item: Employee){
-    alert('You are unblocked user: ' + item.Fullname);
+    this.http.get('localhost:8080/user/employee/unblock/'+ item.EmpID).subscribe((rs) => {
+      if(rs == "ok"){
+        alert('You are unblocked user: ' + item.Fullname);
+      }
+     })
   }
 
   updateItemPerPage(target: any){
@@ -80,8 +91,21 @@ export class UserManagementComponent implements OnInit {
 
 
 
+  //list = users
   getListUsers(): Observable<any>{
+    //return list
     return this.http.get<Employee[]>('http://localhost:8080/user/list');
   }
 
+  nextPage(){
+    this.pageButton1 = this.pageButton1 + 1;
+    this.pageButton2 = this.pageButton2 + 1;
+    this.pageButton3 = this.pageButton3 + 1;
+  }
+
+  prePage(){
+    this.pageButton1 = this.pageButton1 - 1;
+    this.pageButton2 = this.pageButton2 - 1;
+    this.pageButton3 = this.pageButton3 - 1;
+  }
 }

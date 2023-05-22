@@ -1,3 +1,6 @@
 /* .block {
   width: 100px !important;
 } */
+.page-link {
+  cursor: pointer;
+}

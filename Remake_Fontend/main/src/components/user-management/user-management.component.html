@@ -79,16 +79,20 @@
                 <div>You are at {{currentPage}}/{{totalPages}} pages</div>
                 <nav aria-label="...">
                     <ul class="pagination">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        <li class="page-item" ngClass="{'disabled': currentPage == 1}">
+                            <div class="page-link" (click)="prePage()">Previous</div>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active">
-                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item" [ngClass]="{'d-none': totalPages < 3}"><a class="page-link" href="#">3</a></li>
                         <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
+                          <div class="page-link" (click)="onPageChange(pageButton1)">{{pageButton1}}</div>
+                        </li>
+                        <li class="page-item" [ngClass]="{'d-none': totalPages < 2}">
+                            <div class="page-link" (click)="onPageChange(pageButton2)">{{pageButton2}}</div>
+                        </li>
+                        <li class="page-item" [ngClass]="{'d-none': totalPages < 3}">
+                          <div class="page-link" (click)="onPageChange(pageButton3)">{{pageButton3}}</div>
+                        </li>
+                        <li class="page-item">
+                            <div class="page-link" (click)="nextPage()">Next</div>
                         </li>
                     </ul>
                 </nav>

@@ -48,4 +48,16 @@ export class LoginComponent implements OnInit {
     const token = this.getToken();
     return token ? true : false; // Kiểm tra xem JWT có tồn tại không
   }
+
+
+  checkLogin(){
+    var data = {
+      username: this.userLogin.get('email')?.value,
+      password: this.userLogin.get('password')?.value
+    }
+    console.log(data);
+    this.http.post("localhost:8080/login", data).subscribe((resp) => {
+      console.log(resp);
+    })
+  }
 }

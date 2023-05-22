@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/model/employee';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-information',
@@ -34,7 +35,7 @@ export class UserInformationComponent implements OnInit {
   block: FormControl = new FormControl('');
   role: FormControl = new FormControl('');
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient) {
     const params = this.router.getCurrentNavigation()?.extras.state?.['queryData'];
     if(params) {
       this.user = JSON.parse(params);
@@ -69,8 +70,15 @@ export class UserInformationComponent implements OnInit {
       RoleID: this.role.value
     }
 
-    alert('You are updated: '+ upUser.Fullname);
-
-    this.router.navigate(['/userManagement']);
+    // alert('You are updated: '+ upUser.Fullname);
+    this.http.post('localhost:8080/user/create', upUser).subscribe((resp) => {
+      if(resp == "ok"){
+        alert(resp);
+        this.router.navigate(['/userManagement']);
+      }
+      else {
+        alert(resp);
+      }
+    })
   }
 }

@@ -1,6 +1,6 @@
 <!-- <app-header></app-header> -->
 <div class="container-fluid d-flex justify-content-center bg-light">
-  <div class="col-7 card mt-4" id="user-info-form">
+  <div class="col-7 card mt-4 shadow">
     <div class="fs-3 mx-4">User information</div>
     <div class="d-flex justify-content-between">
       <div class="col-2">
@@ -13,49 +13,54 @@
         <form>
           <div class="form-group mx-4">
             <label for="">Fullname</label>
-            <input type="text" class="form-control" [formControl]="fullname">
+            <input type="text" class="form-control" [formControl]="fullname" (change)="checkFullname(fullname.value)">
+            <small class="text-danger">{{nameErr}}</small>
           </div>
           <div class="d-flex mx-4 justify-content-between mt-3">
             <div class="col-6 form-group">
               <label for="">Birthday</label>
-              <input type="date" class="form-control" [formControl]="bod">
+              <input type="date" class="form-control" [formControl]="bod" (change)="checkDate(bod.value)">
+              <small class="text-danger">{{dateErr}}</small>
             </div>
             <div class="col-5 form-group">
               <label for="">Gender</label>
-              <select name="" id="" class="form-select" [formControl]="gender">
-                <option value="true">Male</option>
-                <option value="false">Female</option>
+              <select name="" id="" class="form-select" [formControl]="gender" (change)="checkGender(gender.value)">
+                <option value="Male" [selected]="gender.value == 'Male'">Male</option>
+                <option value="Female" [selected]="gender.value == 'Female'">Female</option>
               </select>
             </div>
           </div>
           <div class="form-group mx-4 mt-3">
             <label for="">Email</label>
-            <input type="email" class="form-control" [formControl]="email">
+            <input type="email" class="form-control" [formControl]="email" (change)="checkEmail(email.value)">
+            <small class="text-danger">{{emailErr}}</small>
           </div>
           <div class="form-group mx-4 mt-3">
             <label for="">Phone</label>
-            <input type="text" class="form-control" [formControl]="phone">
+            <input type="text" class="form-control" [formControl]="phone" (change)="checkPhone(phone.value)">
+            <small id="txtPhoneMessage" class="text-danger">{{phoneErr}}</small>
           </div>
           <div class="form-group mx-4 mt-3">
             <label for="">Address</label>
-            <textarea class="form-control" [formControl]="address"></textarea>
+            <textarea class="form-control" [formControl]="address" (change)="checkAddress(address.value)"></textarea>
+            <small class="text-danger">{{addressErr}}</small>
           </div>
           <div class="form-group mx-4 mt-3">
             <label for="">Department</label>
-            <select name="" id="" class="form-select" [formControl]="department">
-              <option value="" [ngValue]="1">IT</option>
+            <select name="" id="" class="form-select" [formControl]="department" (change)="checkDepartment(department.value)">
+              <option value="1" [ngValue]="1" [selected]="department.value == 1">IT</option>
             </select>
           </div>
           <div class="form-group mx-4 mt-3">
             <label for="">User role</label>
-            <select name="" id="" class="form-select" [formControl]="role">
+            <select name="" id="" class="form-select" [formControl]="role" (change)="checkRole(role.value)">
               <option value="" [ngValue]="1">User</option>
             </select>
           </div>
           <div class="d-flex justify-content-center mt-4 mb-3">
             <a href="/userManagement" class="btn btn-secondary">Back to Management</a>
-            <button class="btn btn-warning mx-3">CLEAR</button>
-            <button class="btn btn-primary" (click)="updateUser()">SAVE</button>
+            <div class="btn btn-warning mx-3" (click)="clear()">CLEAR</div>
+            <div class="btn btn-primary" (click)="updateUser()">SAVE</div>
           </div>
         </form>
       </div>

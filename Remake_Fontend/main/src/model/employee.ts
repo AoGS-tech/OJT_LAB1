@@ -2,11 +2,11 @@ export interface Employee {
   EmpID: number,
   Fullname: string,
   Birthday: string,
-  Gender: boolean,
+  Gender: string,
   Email: string,
   Phone: string,
   Address: string,
   DepartmentID: number,
-  Block: boolean,
+  Block: number,
   RoleID: number
 }

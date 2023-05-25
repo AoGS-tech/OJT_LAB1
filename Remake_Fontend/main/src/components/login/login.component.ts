@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       password: this.userLogin.get('password')?.value
     }
     console.log(data);
-    this.http.post("localhost:8080/login", data).subscribe((resp) => {
+    this.http.post("http://localhost:8080/login", data).subscribe((resp) => {
       console.log(resp);
     })
   }

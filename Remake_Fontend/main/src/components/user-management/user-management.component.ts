@@ -107,7 +107,7 @@ export class UserManagementComponent implements OnInit {
 
     // console.log(val.value);
     if(val != ''){
-      views = this.items.filter((e)=> e.Fullname.includes(val))
+      views = this.items.filter((e)=> e.Fullname.toLowerCase().includes(val.toLowerCase()))
     }
     console.log(views);
     if(endIndex > views.length) endIndex = views.length;

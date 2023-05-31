@@ -1,6 +1,6 @@
 <!-- <app-header></app-header> -->
-<div class="container-fluid d-flex justify-content-center bg-light">
-  <div class="col-7 card mt-4 shadow">
+<div class="container-fluid d-flex justify-content-center bg-light position-static">
+  <div class="col-7 mycard mt-4 shadow mb-5">
     <div class="fs-3 mx-4">User information</div>
     <div class="d-flex justify-content-between">
       <div class="col-2">
@@ -45,12 +45,12 @@
             <textarea class="form-control" [formControl]="address" (change)="checkAddress(address.value)"></textarea>
             <small class="text-danger">{{addressErr}}</small>
           </div>
-          <div class="form-group mx-4 mt-3">
+          <!-- <div class="form-group mx-4 mt-3">
             <label for="">Department</label>
             <select name="" id="" class="form-select" [formControl]="department" (change)="checkDepartment(department.value)">
               <option value="1" [ngValue]="1" [selected]="department.value == 1">IT</option>
             </select>
-          </div>
+          </div> -->
           <div class="form-group mx-4 mt-3">
             <label for="">User role</label>
             <select name="" id="" class="form-select" [formControl]="role" (change)="checkRole(role.value)">

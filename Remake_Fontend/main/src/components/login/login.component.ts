@@ -2,9 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-// import * as jwt_decode from 'jsonwebtoken';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   private apiUrl = '';
   userLogin: FormGroup;
+  token: string = '';
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
     this.userLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -55,9 +54,16 @@ export class LoginComponent implements OnInit {
       username: this.userLogin.get('email')?.value,
       password: this.userLogin.get('password')?.value
     }
-    console.log(data);
-    this.http.post("http://localhost:8080/login", data).subscribe((resp) => {
-      console.log(resp);
+    this.http.post("http://localhost:8080/login", data).subscribe((resp: any) => {
+      this.token = resp;
+      if(this.token === ''){
+        Swal.fire("Email or password is invalid!", "", "error");
+      }
+      else {
+        // Swal.fire("Login success!", "", "success");
+        localStorage.setItem('token', this.token);
+        this.router.navigate(['/home']);
+      }
     })
   }
 }

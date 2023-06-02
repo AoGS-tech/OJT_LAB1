@@ -77,6 +77,11 @@
           </tr>
         </tbody>
       </table>
+      <div *ngIf="displayedItems.length == 0">
+        <div class="text-center empty fs-3 bg-light">
+          The employee list is empty!
+        </div>
+      </div>
       <div class="d-flex justify-content-between">
         <div>You are at {{currentPage}}/{{totalPages}} pages</div>
         <nav aria-label="...">

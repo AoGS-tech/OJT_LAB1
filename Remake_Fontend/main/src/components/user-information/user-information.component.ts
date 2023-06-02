@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/model/employee';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-information',
@@ -56,7 +57,7 @@ export class UserInformationComponent implements OnInit {
   ngOnInit() {
   }
 
-  clear(){
+  clear() {
     this.fullname = new FormControl('');
     this.bod = new FormControl('');
     this.gender = new FormControl('');
@@ -75,42 +76,47 @@ export class UserInformationComponent implements OnInit {
     this.roleErr = '';
   }
   updateUser() {
-    let upUser: Employee = {
-      EmpID: this.user.EmpID,
-      Fullname: this.fullname.value,
-      Birthday: this.bod.value,
-      Gender: this.gender.value,
-      Email: this.email.value,
-      Phone: this.phone.value,
-      Address: this.address.value,
-      DepartmentID: this.department.value,
-      Block: this.block.value,
-      RoleID: this.role.value
+    let upUser: any = {
+      account: this.email.value,
+      password: "123",
+      empID: this.user.EmpID,
+      name: this.fullname.value,
+      birth: this.bod.value,
+      gender: this.gender.value,
+      mail: this.email.value,
+      phone: this.phone.value,
+      address: this.address.value
+      // DepartmentID: this.department.value,
+      // Block: this.block.value,
+      // RoleID: this.role.value
     }
-    console.log(upUser);
-    if (this.checkFullname(this.fullname.value) && this.checkAddress(this.address.value) && this.checkDate(this.bod.value) && this.checkDepartment(this.department.value) && this.checkEmail(this.email.value) && this.checkPhone(this.phone.value) && this.checkRole(this.role.value) && this.checkGender(this.gender.value)) {
-      alert("hihi");
+    // var x = this.checkFullname(this.fullname.value) && this.checkAddress(this.address.value) && this.checkDate(this.bod.value) && this.checkEmail(this.email.value) && this.checkPhone(this.phone.value) && this.checkGender(this.gender.value);
+    // alert(x);
+    if (this.checkFullname(this.fullname.value) && this.checkAddress(this.address.value) && this.checkDate(this.bod.value) && this.checkEmail(this.email.value) && this.checkPhone(this.phone.value) && this.checkGender(this.gender.value)) {
       if (this.user.EmpID == 0) {
-        this.http.post('http://localhost:8080/user/create', upUser).subscribe((resp) => {
+        console.log("create");
+        this.http.post('http://localhost:8080/create', upUser).subscribe((resp) => {
           if (resp == "ok") {
-            alert(resp);
+            Swal.fire("Add an employee success!", "", "success");
             this.router.navigate(['/userManagement']);
           }
           else {
-            alert(resp);
+            Swal.fire("The email " + this.email.value + " is already existed!", "", "error");
           }
         })
       }
       else {
+        console.log("update");
         this.http.post('http://localhost:8080/user/update', upUser).subscribe((resp) => {
-      if(resp == "ok"){
-        alert(resp);
-        this.router.navigate(['/userManagement']);
-      }
-      else {
-        alert(resp);
-      }
-    })
+          if (resp == "ok") {
+            Swal.fire("Update employee information success!", "", "success");
+            this.router.navigate(['/userManagement']);
+          }
+          else {
+            Swal.fire("Update employee information failed!", "", "error");
+            alert(resp);
+          }
+        })
       }
     }
 
@@ -211,7 +217,9 @@ export class UserInformationComponent implements OnInit {
     if (!regex.test(address)) {
       // document.getElementById("txtAddressMessage").innerHTML = "Address must contain at least one alphabet character or number";
       this.addressErr = 'Address must contain at least one alphabet character or number';
+
       return false;
+
     } else {
       this.addressErr = '';
       return true;

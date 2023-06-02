@@ -51,14 +51,14 @@
               <option value="1" [ngValue]="1" [selected]="department.value == 1">IT</option>
             </select>
           </div> -->
-          <div class="form-group mx-4 mt-3">
+          <!-- <div class="form-group mx-4 mt-3">
             <label for="">User role</label>
             <select name="" id="" class="form-select" [formControl]="role" (change)="checkRole(role.value)">
               <option value="" [ngValue]="1">User</option>
             </select>
-          </div>
+          </div> -->
           <div class="d-flex justify-content-center mt-4 mb-3">
-            <a href="/userManagement" class="btn btn-secondary">Back to Management</a>
+            <a href="/userManagement" class="btn btn-secondary">Back</a>
             <div class="btn btn-warning mx-3" (click)="clear()">CLEAR</div>
             <div class="btn btn-primary" (click)="updateUser()">SAVE</div>
           </div>

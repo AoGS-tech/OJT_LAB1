@@ -59,25 +59,26 @@ export class UserManagementComponent implements OnInit {
   }
 
   handleBlock(item: Employee) {
-    // alert('You are blocked user: ' + item.EmpID);
-    this.http.get('http://localhost:8080/user/block/' + item.EmpID).subscribe((rs) => {
-      if (rs == "ok") {
-        // alert('You are blocked user: ' + item.Fullname);
-        // Khởi tạo dữ liệu và gán cho biến items
+    var data = {
+      EmpID: item.EmpID
+    }
+    this.http.post('http://localhost:8080/manager/block', data).subscribe((rs) => {
+      if (rs === "ok") {
         this.getListUsers().subscribe((val: any) => {
           this.items = val.data;
           this.totalPages = Math.ceil(this.items.length / this.itemsPerPage);
           this.updateDisplayedItems('');
-          console.log(val.data);
         })
       }
     })
   }
 
   handleUnBlock(item: Employee) {
-    this.http.get('http://localhost:8080/user/unblock/' + item.EmpID).subscribe((rs) => {
+    var data = {
+      EmpID: item.EmpID
+    }
+    this.http.post('http://localhost:8080/manager/unblock', data).subscribe((rs) => {
       if (rs == "ok") {
-        // alert('You are unblocked user: ' + item.Fullname);
         // Khởi tạo dữ liệu và gán cho biến items
         this.getListUsers().subscribe((val: any) => {
           this.items = val.data;
@@ -109,7 +110,6 @@ export class UserManagementComponent implements OnInit {
     if(val != ''){
       views = this.items.filter((e)=> e.Fullname.toLowerCase().includes(val.toLowerCase()))
     }
-    console.log(views);
     if(endIndex > views.length) endIndex = views.length;
     this.displayedItems = views.slice(startIndex, endIndex);
     // this.displayedItems = this.items;
@@ -120,7 +120,7 @@ export class UserManagementComponent implements OnInit {
   //list = users
   getListUsers(): Observable<any> {
     //return list
-    return this.http.get<Employee[]>('http://localhost:8080/user/list');
+    return this.http.get<Employee[]>('http://localhost:8080/manager/list');
   }
   nextPage() {
     if (this.pageButton3 < this.totalPages) {

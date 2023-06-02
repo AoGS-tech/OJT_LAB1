@@ -22,13 +22,18 @@
       <div class="d-flex mt-4 justify-content-between mx-4">
         <div class="col-7 form-group">
           <label for="">Birthday</label>
-          <input type="date" class="form-control">
+          <input type="date" class="form-control" formControlName="birthday" (change)="checkDate(userData.get('birthday')?.value)">
+
+          <!-- validate birthday  -->
+          <div>
+            <small class="text-danger">{{dateErr}}</small>
+          </div>
         </div>
         <div class="col-4 form-group">
           <label for="">Gender</label>
-          <select name="" id="" class="form-select">
-            <option value="true">Male</option>
-            <option value="false">Female</option>
+          <select name="" id="" class="form-select" formControlName="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
           </select>
         </div>
       </div>
